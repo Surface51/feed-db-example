@@ -159,7 +159,7 @@ function handleSubmit() {
         <Transition name="expand">
           <div v-if="showSubmit" class="search-page__submit">
             <button type="button" class="btn btn-primary btn-lg" @click="handleSubmit">
-              Search
+              Submit
             </button>
           </div>
         </Transition>
@@ -248,6 +248,14 @@ h3 {
 
 .search-page__submit {
   margin-top: 0.5rem;
+  display: grid;
+  place-content: center;
+}
+
+.search-page__submit button {
+  border-radius: 999em;
+  padding: .5em 2.5em;
+  font-weight: bold;
 }
 
 /* Expand / collapse transition for source & attribute rows */
