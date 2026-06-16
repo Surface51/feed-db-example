@@ -8,13 +8,34 @@ import categoriesData from '@/data/real-categories.json'
 import sourcesData from '@/data/real-sources.json'
 import attributesData from '@/data/real-attributes.json'
 
-const keyword = ref('')
-const activeCollections = ref<string[]>([])
+const keyword = ref<string | null>(null)
+
+// Flat list of all attribute labels (including children of parent attributes)
+const flatAttributes = attributesData.flatMap(attr => [
+  { id: attr.id, label: attr.label, children: [] as { id: string; label: string; children: [] }[] },
+  ...attr.children.map(c => ({ id: c.id, label: c.label, children: [] as { id: string; label: string; children: [] }[] })),
+])
+
+// 3-level tree: category → source → attribute
+const searchTreeData = categoriesData.map(cat => ({
+  id: `cat-${cat.id}`,
+  label: cat.label,
+  children: sourcesData.map(src => ({
+    id: `src-${cat.id}-${src.id}`,
+    label: src.label,
+    children: flatAttributes.map(attr => ({
+      id: `attr-${cat.id}-${src.id}-${attr.id}`,
+      label: attr.label,
+      children: [] as { id: string; label: string; children: [] }[],
+    })),
+  })),
+}))
+const activeCollection = ref<string | null>(null)
 const selectedCategory = ref<string | null>(null)
 const selectedSource = ref<string | null>(null)
 const selectedAttribute = ref<string | null>(null)
 
-const showCategory = computed(() => activeCollections.value.length > 0)
+const showCategory = computed(() => activeCollection.value !== null)
 const showSource = computed(() => selectedCategory.value !== null)
 const showAttribute = computed(() => selectedSource.value !== null)
 const showSubmit = computed(() => selectedCategory.value !== null && selectedSource.value !== null && selectedAttribute.value !== null)
@@ -37,15 +58,13 @@ watch(selectedSource, () => {
 })
 
 function toggleCollection(name: string) {
-  const idx = activeCollections.value.indexOf(name)
-  if (idx === -1) activeCollections.value.push(name)
-  else activeCollections.value.splice(idx, 1)
+  activeCollection.value = activeCollection.value === name ? null : name
 }
 
 function handleSubmit() {
   console.log('Search submitted:', {
     keyword: keyword.value,
-    collections: activeCollections.value,
+    collection: activeCollection.value,
     category: selectedCategory.value,
     source: selectedSource.value,
     attribute: selectedAttribute.value,
@@ -76,13 +95,8 @@ function handleSubmit() {
         <!-- Search by keyword -->
         <section class="search-page__section">
           <h2 class="">Search data by keyword</h2>
-          <div class="input-group search-page__keyword-input">
-            <input v-model="keyword" type="text" class="form-control" placeholder="e.g. alfalfa, crude protein, NDF…"
-              aria-label="Search by keyword" />
-            <button class="btn btn-outline-secondary" type="button" aria-label="Search">
-              <i class="bi bi-search" aria-hidden="true"></i>
-            </button>
-          </div>
+          <HierarchicalAutocomplete v-model="keyword" :items="searchTreeData" label=""
+            placeholder="Search by category, source, or attribute…" />
         </section>
 
         <!-- Filter by collection -->
@@ -93,10 +107,9 @@ function handleSubmit() {
             here: https://animalnutrition.org/nrc_reports and here: https://www.nationalacademies.org/publications/all
           </p>
           <div class="search-page__collection-grid">
-            <button v-for="col in collectionsData" :key="col" type="button" class="btn search-page__collection-btn"
-              :class="activeCollections.includes(col)
-                ? 'btn-primary search-page__collection-btn--active'
-                : 'btn-outline-primary'" @click="toggleCollection(col)">
+            <button v-for="col in collectionsData" :key="col" type="button" class="search-page__collection-btn"
+              :class="{ 'search-page__collection-btn--active': activeCollection === col }"
+              @click="toggleCollection(col)">
               {{ col }}
             </button>
           </div>
@@ -193,10 +206,6 @@ h3 {
   margin-bottom: 0.85rem;
 }
 
-.search-page__keyword-input {
-  max-width: 480px;
-}
-
 .search-page__collection-grid {
   margin: 2rem 0;
   display: grid;
@@ -205,11 +214,26 @@ h3 {
 }
 
 .search-page__collection-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
   padding: 0.375rem 1rem;
   border-radius: 999rem;
-  border-width: 3px;
-  transition: all 0.15s ease;
+  border: 3px solid var(--bs-primary);
+  background: transparent;
+  color: var(--bs-primary);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.search-page__collection-btn:hover,
+.search-page__collection-btn--active {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: #fff;
 }
 
 .search-page__dropdowns {
@@ -242,18 +266,21 @@ h3 {
 }
 </style>
 <style>
-.hier-autocomplete label {
-  display: none;
-}
+.search-page {
+  .hier-autocomplete label {
+    display: none;
+  }
 
-button,
-p {
-  font-size: 20px !important;
-}
+  button,
+  p {
+    font-size: 20px !important;
+  }
 
-.hier-autocomplete,
-.flat-autocomplete {
-  position: relative;
+  .hier-autocomplete,
+  .flat-autocomplete {
+    position: relative;
+  }
+
 }
 
 .page-layout {

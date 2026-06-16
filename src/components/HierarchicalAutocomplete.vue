@@ -24,22 +24,21 @@ const open = ref(false)
 const rootEl = ref<HTMLElement | null>(null)
 const inputEl = ref<HTMLInputElement | null>(null)
 
-// Flattened list of selectable rows for the dropdown, preserving parent/child context.
-// Each row carries a display label and an indent level.
 interface Row {
   id: string
-  label: string      // display label (just the item's own name)
-  fullLabel: string  // full path used as the emitted value, e.g. "silage — headed"
-  depth: number      // 0 = top-level, 1 = child
+  label: string
+  fullLabel: string
+  depth: number
+  hasChildren: boolean
 }
 
 function buildRows(items: TreeItem[], depth = 0, parentLabel = ''): Row[] {
   const rows: Row[] = []
   for (const item of items) {
     const fullLabel = parentLabel ? `${parentLabel} — ${item.label}` : item.label
-    rows.push({ id: item.id, label: item.label, fullLabel, depth })
+    rows.push({ id: item.id, label: item.label, fullLabel, depth, hasChildren: !!item.children?.length })
     if (item.children?.length) {
-      rows.push(...buildRows(item.children, depth + 1, item.label))
+      rows.push(...buildRows(item.children, depth + 1, fullLabel))
     }
   }
   return rows
@@ -47,10 +46,25 @@ function buildRows(items: TreeItem[], depth = 0, parentLabel = ''): Row[] {
 
 const allRows = computed(() => buildRows(props.items))
 
+// Returns a pruned copy of the tree: a node is kept if its label matches OR
+// any descendant matches. When a node itself matches, all its children are kept.
+function filterTree(items: TreeItem[], q: string): TreeItem[] {
+  return items.flatMap(item => {
+    if (item.label.toLowerCase().includes(q)) {
+      return [item]
+    }
+    const matchingChildren = filterTree(item.children ?? [], q)
+    if (matchingChildren.length > 0) {
+      return [{ ...item, children: matchingChildren }]
+    }
+    return []
+  })
+}
+
 const filteredRows = computed(() => {
   const q = inputText.value.trim().toLowerCase()
   if (!q || props.modelValue !== null) return allRows.value
-  return allRows.value.filter(r => r.fullLabel.toLowerCase().includes(q))
+  return buildRows(filterTree(props.items, q))
 })
 
 function onFocus() {
@@ -129,9 +143,10 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onDocMousedown))
           class="dropdown-item-btn"
           :class="{
             'is-selected': modelValue === row.fullLabel,
-            'is-child': row.depth > 0,
-            'is-parent': row.depth === 0 && items.find(i => i.id === row.id)?.children?.length,
+            'is-parent': row.hasChildren,
+            'is-leaf': !row.hasChildren && row.depth > 0,
           }"
+          :style="{ paddingLeft: `calc(0.85rem + ${row.depth * 0.9}rem)` }"
           @mousedown.prevent="selectRow(row)"
         >
           {{ row.label }}
@@ -190,17 +205,16 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onDocMousedown))
   color: #212121;
 }
 
-/* Parent items that have children get a subtle weight bump */
+/* Items that have children: bold, dark */
 .dropdown-item-btn.is-parent {
   font-weight: 600;
   color: #1b4332;
 }
 
-/* Child items are indented and slightly smaller */
-.dropdown-item-btn.is-child {
-  padding-left: 1.6rem;
+/* Leaf items nested under a parent */
+.dropdown-item-btn.is-leaf {
   font-size: 0.85rem;
-  color: #444;
+  color: #555;
   background-color: #fafafa;
 }
 
