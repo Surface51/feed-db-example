@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 
 interface Item {
   id: string
@@ -20,6 +20,13 @@ const emit = defineEmits<{
 
 const inputText = ref('')
 const open = ref(false)
+
+watch(() => props.modelValue, (val) => {
+  if (val === null) {
+    inputText.value = ''
+    open.value = false
+  }
+})
 const rootEl = ref<HTMLElement | null>(null)
 const inputEl = ref<HTMLInputElement | null>(null)
 
