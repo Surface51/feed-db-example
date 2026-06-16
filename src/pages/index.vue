@@ -41,12 +41,10 @@ const showSource = computed(() => selectedCategory.value !== null)
 const showAttribute = computed(() => selectedSource.value !== null)
 const showSubmit = computed(() => selectedCategory.value !== null && selectedSource.value !== null && selectedAttribute.value !== null)
 
-watch(showCategory, (visible) => {
-  if (!visible) {
-    selectedCategory.value = null
-    selectedSource.value = null
-    selectedAttribute.value = null
-  }
+watch(activeCollection, () => {
+  selectedCategory.value = null
+  selectedSource.value = null
+  selectedAttribute.value = null
 })
 
 watch(selectedCategory, () => {
@@ -87,10 +85,6 @@ function handleSubmit() {
         </p>
         <p class="">
           Use the search bar or select a data collection to find the nutrition data you need.
-        </p>
-        <p class="search-page__intro">
-          The work of NANP is made possible in part by sponsors. The work of NANP is made possible in part by sponsors.
-          More intro about that here.
         </p>
 
         <!-- Search by keyword -->
