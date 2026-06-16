@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
 import FlatAutocomplete from '@/components/FlatAutocomplete.vue'
 import HierarchicalAutocomplete from '@/components/HierarchicalAutocomplete.vue'
+import ExpandTransition from '@/components/ExpandTransition.vue'
 import collectionsData from '@/data/collections.json'
 import categoriesData from '@/data/real-categories.json'
 import sourcesData from '@/data/real-sources.json'
@@ -117,7 +118,7 @@ function handleSubmit() {
 
         <!-- Cascading autocomplete dropdowns -->
         <section class="search-page__section">
-          <Transition name="expand">
+          <ExpandTransition>
             <div v-if="showCategory">
               <h3 class="">Select category</h3>
               <p class="search-page__section-desc">
@@ -128,7 +129,7 @@ function handleSubmit() {
               <div class="search-page__dropdowns">
                 <FlatAutocomplete v-model="selectedCategory" :items="categoriesData" label="" />
 
-                <Transition name="expand">
+                <ExpandTransition>
                   <div v-if="showSource" class="search-page__dropdown-row">
                     <h3>Select a source</h3>
                     <p>Listed below are the ingredient sources for the category you selected. A source is the original
@@ -137,9 +138,9 @@ function handleSubmit() {
                     </p>
                     <FlatAutocomplete v-model="selectedSource" :items="sourcesData" label="" />
                   </div>
-                </Transition>
+                </ExpandTransition>
 
-                <Transition name="expand">
+                <ExpandTransition>
                   <div v-if="showAttribute" class="search-page__dropdown-row">
                     <h3>Select an attribute</h3>
                     <p>Finally, select an attribute to further define the ingredient. Attributes describe
@@ -149,20 +150,20 @@ function handleSubmit() {
                       attributes, where broader categories contain more specific descriptions.</p>
                     <HierarchicalAutocomplete v-model="selectedAttribute" :items="attributesData" label="" />
                   </div>
-                </Transition>
+                </ExpandTransition>
               </div>
             </div>
-          </Transition>
+          </ExpandTransition>
         </section>
 
         <!-- Submit -->
-        <Transition name="expand">
+        <ExpandTransition>
           <div v-if="showSubmit" class="search-page__submit">
             <button type="button" class="btn btn-primary btn-lg" @click="handleSubmit">
               Submit
             </button>
           </div>
-        </Transition>
+        </ExpandTransition>
 
       </div>
     </div>
@@ -172,6 +173,7 @@ function handleSubmit() {
 <style scoped>
 h2,
 h3 {
+  margin-top: 2em;
   font-weight: 900;
   color: var(--bs-primary);
 }
@@ -256,21 +258,6 @@ h3 {
   border-radius: 999em;
   padding: .5em 2.5em;
   font-weight: bold;
-}
-
-/* Expand / collapse transition for source & attribute rows */
-.expand-enter-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.expand-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.expand-enter-from,
-.expand-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
 }
 </style>
 <style>
