@@ -22,5 +22,6 @@
 <style scoped>
   .page-title-section__media--gradient {
     background: url(/images/grain.jpg);
+    background-size: cover;
   }
 </style>
