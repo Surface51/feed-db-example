@@ -1,70 +1,23 @@
 [
+    { "id": "1369", "label": "bran", "children": [] },
+    { "id": "1372", "label": "middlings", "children": [] },
+    { "id": "1517", "label": "hay, vegetative", "children": [] },
+    { "id": "1520", "label": "straw", "children": [] },
     {
-        "tid": "1369",
-        "name": "bran",
-        "children": [],
-        "category": {}
-    },
-    {
-        "tid": "1372",
-        "name": "middlings",
-        "children": [],
-        "category": {}
-    },
-    {
-        "tid": "1517",
-        "name": "hay, vegetative",
-        "children": [],
-        "category": {}
-    },
-    {
-        "tid": "1520",
-        "name": "straw",
-        "children": [],
-        "category": {}
-    },
-    {
-        "tid": "1574",
-        "name": "silage",
+        "id": "1574",
+        "label": "silage",
         "children": [
-            {
-                "tid": "1518",
-                "name": "headed",
-                "children": [],
-                "category": {}
-            },
-            {
-                "tid": "1519",
-                "name": "vegetative",
-                "children": [],
-                "category": {}
-            }
-        ],
-        "category": {}
+            { "id": "1518", "label": "headed", "children": [] },
+            { "id": "1519", "label": "vegetative", "children": [] }
+        ]
     },
     {
-        "tid": "1889",
-        "name": "forage",
+        "id": "1889",
+        "label": "forage",
         "children": [
-            {
-                "tid": "1890",
-                "name": "fresh",
-                "children": [],
-                "category": {}
-            }
-        ],
-        "category": {}
+            { "id": "1890", "label": "fresh", "children": [] }
+        ]
     },
-    {
-        "tid": "1891",
-        "name": "seed",
-        "children": [],
-        "category": {}
-    },
-    {
-        "tid": "1893",
-        "name": "screenings",
-        "children": [],
-        "category": {}
-    }
+    { "id": "1891", "label": "seed", "children": [] },
+    { "id": "1893", "label": "screenings", "children": [] }
 ]

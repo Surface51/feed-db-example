@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { ref, computed, watch } from 'vue'
 import PageTitleSection from '@/components/PageTitleSection.vue'
+import FlatAutocomplete from '@/components/FlatAutocomplete.vue'
 import HierarchicalAutocomplete from '@/components/HierarchicalAutocomplete.vue'
 import collectionsData from '@/data/collections.json'
-import categoriesData from '@/data/categories.json'
-import sourcesData from '@/data/sources.json'
-import attributesData from '@/data/attributes.json'
+import categoriesData from '@/data/real-categories.json'
+import sourcesData from '@/data/real-sources.json'
+import attributesData from '@/data/real-attributes.json'
 
 const keyword = ref('')
 const activeCollections = ref<string[]>([])
@@ -100,7 +101,7 @@ function handleSubmit() {
           </p>
 
           <div class="search-page__dropdowns">
-            <HierarchicalAutocomplete v-model="selectedCategory" :items="categoriesData" label="" />
+            <FlatAutocomplete v-model="selectedCategory" :items="categoriesData" label="" />
 
             <Transition name="expand">
               <div v-if="showSource" class="search-page__dropdown-row">
@@ -108,7 +109,7 @@ function handleSubmit() {
                 <p>Listed below are the ingredient sources for the category you selected. A source is the original
                   material the ingredient comes from, identified by its scientific genus and species when applicable.
                 </p>
-                <HierarchicalAutocomplete v-model="selectedSource" :items="sourcesData" label="" />
+                <FlatAutocomplete v-model="selectedSource" :items="sourcesData" label="" />
               </div>
             </Transition>
 
@@ -118,8 +119,7 @@ function handleSubmit() {
                 <p>Finally, select an attribute to further define the ingredient. Attributes describe characteristics or
                   processing methods, such as drying, grinding, or extraction. Some ingredients include a hierarchy of
                   attributes, where broader categories contain more specific descriptions.</p>
-                <HierarchicalAutocomplete v-model="selectedAttribute" :items="attributesData"
-                  label="" />
+                <HierarchicalAutocomplete v-model="selectedAttribute" :items="attributesData" label="" />
               </div>
             </Transition>
           </div>
@@ -179,20 +179,18 @@ h3 {
 }
 
 .search-page__collection-grid {
+  margin: 2rem 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
 }
 
 .search-page__collection-btn {
   font-size: 0.875rem;
   padding: 0.375rem 1rem;
-  border-radius: 2rem;
+  border-radius: 999rem;
+  border-width: 3px;
   transition: all 0.15s ease;
-}
-
-.search-page__collection-btn--active {
-  box-shadow: 0 0 0 2px #1b4332;
 }
 
 .search-page__dropdowns {
@@ -227,5 +225,10 @@ h3 {
 <style>
 .hier-autocomplete label {
   display: none;
+}
+
+button,
+p {
+  font-size: 20px !important;
 }
 </style>

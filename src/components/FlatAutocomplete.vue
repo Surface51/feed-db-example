@@ -1,15 +1,14 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
-interface TreeItem {
+interface Item {
   id: string
   label: string
-  children: TreeItem[]
 }
 
 const props = defineProps<{
   modelValue: string | null
-  items: TreeItem[]
+  items: Item[]
   label: string
   placeholder?: string
   disabled?: boolean
@@ -24,33 +23,10 @@ const open = ref(false)
 const rootEl = ref<HTMLElement | null>(null)
 const inputEl = ref<HTMLInputElement | null>(null)
 
-// Flattened list of selectable rows for the dropdown, preserving parent/child context.
-// Each row carries a display label and an indent level.
-interface Row {
-  id: string
-  label: string      // display label (just the item's own name)
-  fullLabel: string  // full path used as the emitted value, e.g. "silage — headed"
-  depth: number      // 0 = top-level, 1 = child
-}
-
-function buildRows(items: TreeItem[], depth = 0, parentLabel = ''): Row[] {
-  const rows: Row[] = []
-  for (const item of items) {
-    const fullLabel = parentLabel ? `${parentLabel} — ${item.label}` : item.label
-    rows.push({ id: item.id, label: item.label, fullLabel, depth })
-    if (item.children?.length) {
-      rows.push(...buildRows(item.children, depth + 1, item.label))
-    }
-  }
-  return rows
-}
-
-const allRows = computed(() => buildRows(props.items))
-
-const filteredRows = computed(() => {
+const filteredItems = computed(() => {
   const q = inputText.value.trim().toLowerCase()
-  if (!q || props.modelValue !== null) return allRows.value
-  return allRows.value.filter(r => r.fullLabel.toLowerCase().includes(q))
+  if (!q || props.modelValue !== null) return props.items
+  return props.items.filter(i => i.label.toLowerCase().includes(q))
 })
 
 function onFocus() {
@@ -67,9 +43,9 @@ function onInput() {
   open.value = true
 }
 
-function selectRow(row: Row) {
-  emit('update:modelValue', row.fullLabel)
-  inputText.value = row.fullLabel
+function selectItem(label: string) {
+  emit('update:modelValue', label)
+  inputText.value = label
   open.value = false
 }
 
@@ -93,7 +69,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onDocMousedown))
 </script>
 
 <template>
-  <div ref="rootEl" class="hier-autocomplete" :class="{ 'is-disabled': disabled }">
+  <div ref="rootEl" class="flat-autocomplete" :class="{ 'is-disabled': disabled }">
     <label v-if="label" class="form-label fw-semibold">{{ label }}</label>
     <div class="position-relative">
       <input
@@ -121,20 +97,16 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onDocMousedown))
 
     <Transition name="dropdown">
       <div v-if="open && !disabled" class="dropdown-panel shadow-sm border rounded">
-        <div v-if="filteredRows.length === 0" class="dropdown-empty">No results found</div>
+        <div v-if="filteredItems.length === 0" class="dropdown-empty">No results found</div>
         <button
-          v-for="row in filteredRows"
-          :key="row.id"
+          v-for="item in filteredItems"
+          :key="item.id"
           type="button"
           class="dropdown-item-btn"
-          :class="{
-            'is-selected': modelValue === row.fullLabel,
-            'is-child': row.depth > 0,
-            'is-parent': row.depth === 0 && items.find(i => i.id === row.id)?.children?.length,
-          }"
-          @mousedown.prevent="selectRow(row)"
+          :class="{ 'is-selected': modelValue === item.label }"
+          @mousedown.prevent="selectItem(item.label)"
         >
-          {{ row.label }}
+          {{ item.label }}
         </button>
       </div>
     </Transition>
@@ -142,7 +114,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onDocMousedown))
 </template>
 
 <style scoped>
-.hier-autocomplete.is-disabled {
+.flat-autocomplete.is-disabled {
   opacity: 0.5;
   pointer-events: none;
 }
@@ -188,20 +160,6 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', onDocMousedown))
   cursor: pointer;
   font-size: 0.9rem;
   color: #212121;
-}
-
-/* Parent items that have children get a subtle weight bump */
-.dropdown-item-btn.is-parent {
-  font-weight: 600;
-  color: #1b4332;
-}
-
-/* Child items are indented and slightly smaller */
-.dropdown-item-btn.is-child {
-  padding-left: 1.6rem;
-  font-size: 0.85rem;
-  color: #444;
-  background-color: #fafafa;
 }
 
 .dropdown-item-btn:hover,

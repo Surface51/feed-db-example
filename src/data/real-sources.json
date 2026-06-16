@@ -1,150 +1,39 @@
 [
-    {
-        "title": "Almond",
-        "id": "1385"
-    },
-    {
-        "title": "Apple",
-        "id": "1387"
-    },
-    {
-        "title": "Bakery products",
-        "id": "1170"
-    },
-    {
-        "title": "Barley",
-        "id": "1171"
-    },
-    {
-        "title": "Brewer\u0027s grains (unspecified source)",
-        "id": "1279"
-    },
-    {
-        "title": "Camelina",
-        "id": "1079"
-    },
-    {
-        "title": "Candy products",
-        "id": "1406"
-    },
-    {
-        "title": "Canola",
-        "id": "1286"
-    },
-    {
-        "title": "Citrus",
-        "id": "1287"
-    },
-    {
-        "title": "Copra",
-        "id": "1288"
-    },
-    {
-        "title": "Corn",
-        "id": "1414"
-    },
-    {
-        "title": "Cotton",
-        "id": "1289"
-    },
-    {
-        "title": "Fish",
-        "id": "1290"
-    },
-    {
-        "title": "Flaxseed",
-        "id": "1072"
-    },
-    {
-        "title": "Fruit and vegetable blends",
-        "id": "1452"
-    },
-    {
-        "title": "Glycerin",
-        "id": "1794"
-    },
-    {
-        "title": "Linseed",
-        "id": "1463"
-    },
-    {
-        "title": "Meat and bone products",
-        "id": "1465"
-    },
-    {
-        "title": "Milk",
-        "id": "1568"
-    },
-    {
-        "title": "Oat",
-        "id": "1291"
-    },
-    {
-        "title": "Palm kernel",
-        "id": "1565"
-    },
-    {
-        "title": "Pea",
-        "id": "1292"
-    },
-    {
-        "title": "Peanut",
-        "id": "1293"
-    },
-    {
-        "title": "Petfood",
-        "id": "1566"
-    },
-    {
-        "title": "Potato",
-        "id": "1477"
-    },
-    {
-        "title": "Poultry products",
-        "id": "1479"
-    },
-    {
-        "title": "Rice",
-        "id": "1164"
-    },
-    {
-        "title": "Safflower",
-        "id": "1567"
-    },
-    {
-        "title": "Sesame",
-        "id": "1081"
-    },
-    {
-        "title": "Sorghum",
-        "id": "1178"
-    },
-    {
-        "title": "Soybean",
-        "id": "1275"
-    },
-    {
-        "title": "Sugarbeet",
-        "id": "1179"
-    },
-    {
-        "title": "Sugarcane",
-        "id": "1510"
-    },
-    {
-        "title": "Sunflower",
-        "id": "1180"
-    },
-    {
-        "title": "Triticale",
-        "id": "1512"
-    },
-    {
-        "title": "Wheat",
-        "id": "1301"
-    },
-    {
-        "title": "Yeast",
-        "id": "1560"
-    }
+    { "id": "1385", "label": "Almond" },
+    { "id": "1387", "label": "Apple" },
+    { "id": "1170", "label": "Bakery products" },
+    { "id": "1171", "label": "Barley" },
+    { "id": "1279", "label": "Brewer's grains (unspecified source)" },
+    { "id": "1079", "label": "Camelina" },
+    { "id": "1406", "label": "Candy products" },
+    { "id": "1286", "label": "Canola" },
+    { "id": "1287", "label": "Citrus" },
+    { "id": "1288", "label": "Copra" },
+    { "id": "1414", "label": "Corn" },
+    { "id": "1289", "label": "Cotton" },
+    { "id": "1290", "label": "Fish" },
+    { "id": "1072", "label": "Flaxseed" },
+    { "id": "1452", "label": "Fruit and vegetable blends" },
+    { "id": "1794", "label": "Glycerin" },
+    { "id": "1463", "label": "Linseed" },
+    { "id": "1465", "label": "Meat and bone products" },
+    { "id": "1568", "label": "Milk" },
+    { "id": "1291", "label": "Oat" },
+    { "id": "1565", "label": "Palm kernel" },
+    { "id": "1292", "label": "Pea" },
+    { "id": "1293", "label": "Peanut" },
+    { "id": "1566", "label": "Petfood" },
+    { "id": "1477", "label": "Potato" },
+    { "id": "1479", "label": "Poultry products" },
+    { "id": "1164", "label": "Rice" },
+    { "id": "1567", "label": "Safflower" },
+    { "id": "1081", "label": "Sesame" },
+    { "id": "1178", "label": "Sorghum" },
+    { "id": "1275", "label": "Soybean" },
+    { "id": "1179", "label": "Sugarbeet" },
+    { "id": "1510", "label": "Sugarcane" },
+    { "id": "1180", "label": "Sunflower" },
+    { "id": "1512", "label": "Triticale" },
+    { "id": "1301", "label": "Wheat" },
+    { "id": "1560", "label": "Yeast" }
 ]
