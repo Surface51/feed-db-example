@@ -1,0 +1,70 @@
+[
+    {
+        "tid": "1369",
+        "name": "bran",
+        "children": [],
+        "category": {}
+    },
+    {
+        "tid": "1372",
+        "name": "middlings",
+        "children": [],
+        "category": {}
+    },
+    {
+        "tid": "1517",
+        "name": "hay, vegetative",
+        "children": [],
+        "category": {}
+    },
+    {
+        "tid": "1520",
+        "name": "straw",
+        "children": [],
+        "category": {}
+    },
+    {
+        "tid": "1574",
+        "name": "silage",
+        "children": [
+            {
+                "tid": "1518",
+                "name": "headed",
+                "children": [],
+                "category": {}
+            },
+            {
+                "tid": "1519",
+                "name": "vegetative",
+                "children": [],
+                "category": {}
+            }
+        ],
+        "category": {}
+    },
+    {
+        "tid": "1889",
+        "name": "forage",
+        "children": [
+            {
+                "tid": "1890",
+                "name": "fresh",
+                "children": [],
+                "category": {}
+            }
+        ],
+        "category": {}
+    },
+    {
+        "tid": "1891",
+        "name": "seed",
+        "children": [],
+        "category": {}
+    },
+    {
+        "tid": "1893",
+        "name": "screenings",
+        "children": [],
+        "category": {}
+    }
+]

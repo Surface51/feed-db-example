@@ -1,0 +1,39 @@
+[
+  {
+    "group": "NANP Publications",
+    "items": [
+      { "id": 1, "label": "NANP Feed Composition Database v1.0" },
+      { "id": 2, "label": "NANP Feed Composition Database v2.0" },
+      { "id": 3, "label": "NANP Collaborative Dataset 2023" }
+    ]
+  },
+  {
+    "group": "NRC Reports",
+    "items": [
+      { "id": 4, "label": "NRC Dairy Cattle (2001)" },
+      { "id": 5, "label": "NRC Beef Cattle (2016)" },
+      { "id": 6, "label": "NRC Swine (2012)" },
+      { "id": 7, "label": "NRC Poultry (1994)" },
+      { "id": 8, "label": "NRC Horses (2007)" },
+      { "id": 9, "label": "NRC Small Ruminants (2007)" }
+    ]
+  },
+  {
+    "group": "Peer-Reviewed Studies",
+    "items": [
+      { "id": 10, "label": "Journal of Dairy Science" },
+      { "id": 11, "label": "Journal of Animal Science" },
+      { "id": 12, "label": "Animal Feed Science and Technology" },
+      { "id": 13, "label": "Livestock Science" }
+    ]
+  },
+  {
+    "group": "International Databases",
+    "items": [
+      { "id": 14, "label": "INRA (France)" },
+      { "id": 15, "label": "FEDNA (Spain)" },
+      { "id": 16, "label": "CVB (Netherlands)" },
+      { "id": 17, "label": "AFRCRuminant (UK)" }
+    ]
+  }
+]

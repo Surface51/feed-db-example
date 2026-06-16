@@ -1,0 +1,72 @@
+[
+  {
+    "group": "Forages",
+    "items": [
+      { "id": 1, "label": "Alfalfa" },
+      { "id": 2, "label": "Bermudagrass" },
+      { "id": 3, "label": "Corn Silage" },
+      { "id": 4, "label": "Orchardgrass" },
+      { "id": 5, "label": "Ryegrass" },
+      { "id": 6, "label": "Timothy" },
+      { "id": 7, "label": "Tall Fescue" },
+      { "id": 8, "label": "Sorghum-Sudan Silage" }
+    ]
+  },
+  {
+    "group": "Grains & Cereal Byproducts",
+    "items": [
+      { "id": 9, "label": "Barley, grain" },
+      { "id": 10, "label": "Corn, grain" },
+      { "id": 11, "label": "Oats, grain" },
+      { "id": 12, "label": "Sorghum, grain" },
+      { "id": 13, "label": "Wheat, grain" },
+      { "id": 14, "label": "Dried Distillers Grains with Solubles (DDGS)" },
+      { "id": 15, "label": "Corn Gluten Feed" },
+      { "id": 16, "label": "Wheat Middlings" }
+    ]
+  },
+  {
+    "group": "Protein Supplements",
+    "items": [
+      { "id": 17, "label": "Canola Meal, solvent extracted" },
+      { "id": 18, "label": "Cottonseed Meal, solvent extracted" },
+      { "id": 19, "label": "Soybean Meal, 44% CP" },
+      { "id": 20, "label": "Soybean Meal, 48% CP" },
+      { "id": 21, "label": "Sunflower Meal, solvent extracted" },
+      { "id": 22, "label": "Urea" },
+      { "id": 23, "label": "Blood Meal" },
+      { "id": 24, "label": "Fish Meal, menhaden" }
+    ]
+  },
+  {
+    "group": "Energy Supplements",
+    "items": [
+      { "id": 25, "label": "Animal-Vegetable Fat Blend" },
+      { "id": 26, "label": "Corn Oil" },
+      { "id": 27, "label": "Tallow" },
+      { "id": 28, "label": "Whole Cottonseed" },
+      { "id": 29, "label": "Whole Soybeans, roasted" }
+    ]
+  },
+  {
+    "group": "Byproducts & Residues",
+    "items": [
+      { "id": 30, "label": "Bakery Waste, dried" },
+      { "id": 31, "label": "Beet Pulp, dried" },
+      { "id": 32, "label": "Citrus Pulp, dried" },
+      { "id": 33, "label": "Molasses, sugarcane" },
+      { "id": 34, "label": "Brewers Grains, wet" },
+      { "id": 35, "label": "Tomato Pomace, dried" }
+    ]
+  },
+  {
+    "group": "Minerals & Premixes",
+    "items": [
+      { "id": 36, "label": "Calcium Carbonate (Limestone)" },
+      { "id": 37, "label": "Dicalcium Phosphate" },
+      { "id": 38, "label": "Monocalcium Phosphate" },
+      { "id": 39, "label": "Salt (NaCl)" },
+      { "id": 40, "label": "Magnesium Oxide" }
+    ]
+  }
+]

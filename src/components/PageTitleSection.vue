@@ -4,6 +4,7 @@
 
 <template>
   <section class="page-title-section page-title-section--has-image">
+    <div class="page-title-section__media page-title-section__media--gradient" aria-hidden="true"></div>
     <div class="page-title-section__text">
       <div class="container">
         <div class="region region-page-header">
@@ -20,9 +21,6 @@
 
 <style scoped>
   .page-title-section__media--gradient {
-    background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 40%, #52796f 100%);
-  }
-  .page-title-section--has-image {
-    grid-template-rows: auto;
+    background: url(/images/grain.jpg);
   }
 </style>

@@ -1,0 +1,57 @@
+[
+  {
+    "group": "Proximate Analysis",
+    "items": [
+      { "id": 1, "label": "Dry Matter (DM)" },
+      { "id": 2, "label": "Crude Protein (CP)" },
+      { "id": 3, "label": "Ether Extract (EE)" },
+      { "id": 4, "label": "Crude Fiber (CF)" },
+      { "id": 5, "label": "Ash" },
+      { "id": 6, "label": "Nitrogen-Free Extract (NFE)" }
+    ]
+  },
+  {
+    "group": "Fiber Fractions",
+    "items": [
+      { "id": 7, "label": "Acid Detergent Fiber (ADF)" },
+      { "id": 8, "label": "Neutral Detergent Fiber (NDF)" },
+      { "id": 9, "label": "Acid Detergent Lignin (ADL)" },
+      { "id": 10, "label": "Non-Fiber Carbohydrates (NFC)" },
+      { "id": 11, "label": "Physically Effective NDF (peNDF)" }
+    ]
+  },
+  {
+    "group": "Energy Values",
+    "items": [
+      { "id": 12, "label": "Total Digestible Nutrients (TDN)" },
+      { "id": 13, "label": "Net Energy Lactation (NEL, Mcal/kg)" },
+      { "id": 14, "label": "Net Energy Maintenance (NEm, Mcal/kg)" },
+      { "id": 15, "label": "Net Energy Gain (NEg, Mcal/kg)" },
+      { "id": 16, "label": "Digestible Energy (DE, Mcal/kg)" },
+      { "id": 17, "label": "Metabolizable Energy (ME, Mcal/kg)" }
+    ]
+  },
+  {
+    "group": "Minerals",
+    "items": [
+      { "id": 18, "label": "Calcium (Ca, %)" },
+      { "id": 19, "label": "Phosphorus (P, %)" },
+      { "id": 20, "label": "Potassium (K, %)" },
+      { "id": 21, "label": "Magnesium (Mg, %)" },
+      { "id": 22, "label": "Sulfur (S, %)" },
+      { "id": 23, "label": "Sodium (Na, %)" },
+      { "id": 24, "label": "Chloride (Cl, %)" }
+    ]
+  },
+  {
+    "group": "Amino Acids",
+    "items": [
+      { "id": 25, "label": "Lysine (Lys, %CP)" },
+      { "id": 26, "label": "Methionine (Met, %CP)" },
+      { "id": 27, "label": "Threonine (Thr, %CP)" },
+      { "id": 28, "label": "Tryptophan (Trp, %CP)" },
+      { "id": 29, "label": "Histidine (His, %CP)" },
+      { "id": 30, "label": "Isoleucine (Ile, %CP)" }
+    ]
+  }
+]
