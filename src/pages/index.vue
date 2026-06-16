@@ -14,8 +14,18 @@ const selectedCategory = ref<string | null>(null)
 const selectedSource = ref<string | null>(null)
 const selectedAttribute = ref<string | null>(null)
 
+const showCategory = computed(() => activeCollections.value.length > 0)
 const showSource = computed(() => selectedCategory.value !== null)
 const showAttribute = computed(() => selectedSource.value !== null)
+const showSubmit = computed(() => selectedCategory.value !== null && selectedSource.value !== null && selectedAttribute.value !== null)
+
+watch(showCategory, (visible) => {
+  if (!visible) {
+    selectedCategory.value = null
+    selectedSource.value = null
+    selectedAttribute.value = null
+  }
+})
 
 watch(selectedCategory, () => {
   selectedSource.value = null
@@ -94,43 +104,52 @@ function handleSubmit() {
 
         <!-- Cascading autocomplete dropdowns -->
         <section class="search-page__section">
-          <h3 class="">Select category</h3>
-          <p class="search-page__section-desc">
-            A category consists of related ingredients commonly used by nutritionists when formulating feed or food
-            products.
-          </p>
+          <Transition name="expand">
+            <div v-if="showCategory">
+              <h3 class="">Select category</h3>
+              <p class="search-page__section-desc">
+                A category consists of related ingredients commonly used by nutritionists when formulating feed or food
+                products.
+              </p>
 
-          <div class="search-page__dropdowns">
-            <FlatAutocomplete v-model="selectedCategory" :items="categoriesData" label="" />
+              <div class="search-page__dropdowns">
+                <FlatAutocomplete v-model="selectedCategory" :items="categoriesData" label="" />
 
-            <Transition name="expand">
-              <div v-if="showSource" class="search-page__dropdown-row">
-                <h3>Select a source</h3>
-                <p>Listed below are the ingredient sources for the category you selected. A source is the original
-                  material the ingredient comes from, identified by its scientific genus and species when applicable.
-                </p>
-                <FlatAutocomplete v-model="selectedSource" :items="sourcesData" label="" />
+                <Transition name="expand">
+                  <div v-if="showSource" class="search-page__dropdown-row">
+                    <h3>Select a source</h3>
+                    <p>Listed below are the ingredient sources for the category you selected. A source is the original
+                      material the ingredient comes from, identified by its scientific genus and species when
+                      applicable.
+                    </p>
+                    <FlatAutocomplete v-model="selectedSource" :items="sourcesData" label="" />
+                  </div>
+                </Transition>
+
+                <Transition name="expand">
+                  <div v-if="showAttribute" class="search-page__dropdown-row">
+                    <h3>Select an attribute</h3>
+                    <p>Finally, select an attribute to further define the ingredient. Attributes describe
+                      characteristics or
+                      processing methods, such as drying, grinding, or extraction. Some ingredients include a hierarchy
+                      of
+                      attributes, where broader categories contain more specific descriptions.</p>
+                    <HierarchicalAutocomplete v-model="selectedAttribute" :items="attributesData" label="" />
+                  </div>
+                </Transition>
               </div>
-            </Transition>
-
-            <Transition name="expand">
-              <div v-if="showAttribute" class="search-page__dropdown-row">
-                <h3>Select an attribute</h3>
-                <p>Finally, select an attribute to further define the ingredient. Attributes describe characteristics or
-                  processing methods, such as drying, grinding, or extraction. Some ingredients include a hierarchy of
-                  attributes, where broader categories contain more specific descriptions.</p>
-                <HierarchicalAutocomplete v-model="selectedAttribute" :items="attributesData" label="" />
-              </div>
-            </Transition>
-          </div>
+            </div>
+          </Transition>
         </section>
 
         <!-- Submit -->
-        <div class="search-page__submit">
-          <button type="button" class="btn btn-primary btn-lg" @click="handleSubmit">
-            Search
-          </button>
-        </div>
+        <Transition name="expand">
+          <div v-if="showSubmit" class="search-page__submit">
+            <button type="button" class="btn btn-primary btn-lg" @click="handleSubmit">
+              Search
+            </button>
+          </div>
+        </Transition>
 
       </div>
     </div>
@@ -230,5 +249,14 @@ h3 {
 button,
 p {
   font-size: 20px !important;
+}
+
+.hier-autocomplete,
+.flat-autocomplete {
+  position: relative;
+}
+
+.page-layout {
+  overflow-y: unset !important;
 }
 </style>
